@@ -1,6 +1,7 @@
 const db = require("../db/queries");
 const bcrypt = require("bcryptjs");
-const passport = require("passport");
+const multer = require("multer");
+const upload = multer({ dest: "public/" });
 
 const getSignUp = (req, res) => {
   res.render("sign-up-form");
@@ -19,8 +20,18 @@ const getLogIn = (req, res) => {
   res.render("login-form");
 };
 
+const getFileForm = (req, res) => {
+  res.render("file-form");
+};
+
+const postFileForm = (req, res) => {
+  res.redirect("/");
+};
+
 module.exports = {
   getSignUp,
   postSignUp,
   getLogIn,
+  getFileForm,
+  postFileForm,
 };

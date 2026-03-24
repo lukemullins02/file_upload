@@ -5,8 +5,11 @@ const {
   getSignUp,
   postSignUp,
   getLogIn,
-  postLogIn,
+  getFileForm,
+  postFileForm,
 } = require("../controllers/indexController");
+const multer = require("multer");
+const upload = multer({ dest: "./public/" });
 
 const indexRouter = Router();
 
@@ -28,5 +31,8 @@ indexRouter.post(
     successRedirect: "/",
   }),
 );
+
+indexRouter.get("/file-upload", getFileForm);
+indexRouter.post("/file-upload", upload.single("file"), postFileForm);
 
 module.exports = indexRouter;
