@@ -3,6 +3,14 @@ const bcrypt = require("bcryptjs");
 const multer = require("multer");
 const upload = multer({ dest: "public/" });
 
+const getHome = async (req, res) => {
+  const folders = await db.getFolders();
+
+  res.render("home", {
+    folders: folders,
+  });
+};
+
 const getSignUp = (req, res) => {
   res.render("sign-up-form");
 };
@@ -25,10 +33,12 @@ const getFileForm = (req, res) => {
 };
 
 const postFileForm = (req, res) => {
+  console.log(req.file);
   res.redirect("/");
 };
 
 module.exports = {
+  getHome,
   getSignUp,
   postSignUp,
   getLogIn,

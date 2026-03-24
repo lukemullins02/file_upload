@@ -7,15 +7,14 @@ const {
   getLogIn,
   getFileForm,
   postFileForm,
+  getHome,
 } = require("../controllers/indexController");
 const multer = require("multer");
 const upload = multer({ dest: "./public/" });
 
 const indexRouter = Router();
 
-indexRouter.get("/", isAuth, (req, res) => {
-  res.send("Logged In!!!");
-});
+indexRouter.get("/", isAuth, getHome);
 
 indexRouter.get("/sign-up", loggedIn, getSignUp);
 

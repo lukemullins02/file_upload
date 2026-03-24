@@ -9,6 +9,11 @@ async function createUser(username, password) {
   });
 }
 
+async function getFolders() {
+  return await prisma.folder.findMany();
+}
+
 module.exports = {
   createUser,
+  getFolders,
 };
