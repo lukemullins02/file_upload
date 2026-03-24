@@ -1,6 +1,6 @@
 require("dotenv/config");
 const express = require("express");
-const prisma = require("./lib/prisma.js");
+const { prisma } = require("./lib/prisma.js");
 const expressSession = require("express-session");
 const app = express();
 const passport = require("passport");

@@ -3,8 +3,10 @@ const passport = require("passport");
 
 const indexRouter = Router();
 
-indexRouter.get("/", (req, res) => {
-  res.send("Hello World!");
-});
+const { getSignUp, postSignUp } = require("../controllers/indexController");
+
+indexRouter.get("/sign-up", getSignUp);
+
+indexRouter.post("/sign-up", postSignUp);
 
 module.exports = indexRouter;
