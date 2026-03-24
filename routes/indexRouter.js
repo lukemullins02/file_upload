@@ -1,23 +1,24 @@
 const { Router } = require("express");
 const passport = require("passport");
-
-const indexRouter = Router();
-
+const { isAuth, loggedIn } = require("../controllers/authController");
 const {
   getSignUp,
   postSignUp,
   getLogIn,
+  postLogIn,
 } = require("../controllers/indexController");
 
-indexRouter.get("/", (req, res) => {
+const indexRouter = Router();
+
+indexRouter.get("/", isAuth, (req, res) => {
   res.send("Logged In!!!");
 });
 
-indexRouter.get("/sign-up", getSignUp);
+indexRouter.get("/sign-up", loggedIn, getSignUp);
 
 indexRouter.post("/sign-up", postSignUp);
 
-indexRouter.get("/login", getLogIn);
+indexRouter.get("/login", loggedIn, getLogIn);
 
 indexRouter.post(
   "/login",
