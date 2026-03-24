@@ -1,22 +1,19 @@
 const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
-const prisma = require("../lib/prisma.js");
-const { validPassword } = require("../lib/passwordUtils");
+const { prisma } = require("../lib/prisma.js");
+const bcrypt = require("bcryptjs");
 
 const verifyCallback = async (username, password, done) => {
   try {
-    const { rows } = await prisma.query(
-      "SELECT * FROM users WHERE username = $1",
-      [username],
-    );
-
-    const user = rows[0];
+    const user = await prisma.user.findUnique({
+      where: { username: username },
+    });
 
     if (!user) {
       return done(null, false, { message: "*Incorrect Username" });
     }
 
-    const isValid = validPassword(password, user.hash, user.salt);
+    const isValid = await bcrypt.compare(password, user.password);
 
     if (isValid) {
       return done(null, user);
@@ -38,11 +35,11 @@ passport.serializeUser((user, done) => {
 
 passport.deserializeUser(async (id, done) => {
   try {
-    const { rows } = await pool.query("SELECT * FROM users WHERE id = $1", [
-      id,
-    ]);
+    const user = await prisma.user.findUnique({
+      where: { id: id },
+    });
 
-    done(null, rows[0]);
+    done(null, user);
   } catch (err) {
     done(err);
   }

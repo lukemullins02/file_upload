@@ -1,4 +1,5 @@
 require("dotenv/config");
+require("./config/passport");
 const express = require("express");
 const { prisma } = require("./lib/prisma.js");
 const expressSession = require("express-session");

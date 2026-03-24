@@ -1,5 +1,5 @@
-const { genPassword, validPassword } = require("../lib/passwordUtils");
 const db = require("../db/queries");
+const bcrypt = require("bcryptjs");
 
 const getSignUp = (req, res) => {
   res.render("sign-up-form");
@@ -7,13 +7,28 @@ const getSignUp = (req, res) => {
 
 const postSignUp = async (req, res) => {
   const { username, password } = req.body;
+  const hashPassword = await bcrypt.hash(password, 10);
 
-  await db.createUser(username, password);
+  await db.createUser(username, hashPassword);
 
   res.redirect("/sign-up");
 };
 
+const getLogIn = (req, res) => {
+  res.render("login-form");
+};
+
+// const postSignUp = async (req, res) => {
+//   const { username, password } = req.body;
+//   const hashPassword = await bcrypt.hash(password, 10);
+
+//   await db.createUser(username, hashPassword);
+
+//   res.redirect("/sign-up");
+// };
+
 module.exports = {
   getSignUp,
   postSignUp,
+  getLogIn,
 };
