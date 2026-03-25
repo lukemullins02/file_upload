@@ -13,6 +13,7 @@ const {
   getFolder,
   getFolderUpdate,
   postFolderUpdate,
+  getDeleteFolder,
 } = require("../controllers/indexController");
 const multer = require("multer");
 const upload = multer({ dest: "./public/" });
@@ -49,5 +50,7 @@ indexRouter.post("/create-folder", postFolderForm);
 indexRouter.get("/folder/:id/update", isAuth, getFolderUpdate);
 
 indexRouter.post("/folder/:id/update", postFolderUpdate);
+
+indexRouter.get("/folder/:id/delete", getDeleteFolder);
 
 module.exports = indexRouter;

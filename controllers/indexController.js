@@ -41,6 +41,7 @@ const getFolderForm = (req, res) => {
 const postFolderForm = async (req, res) => {
   const { name } = req.body;
   await db.createFolder(name, req.user.id);
+  res.redirect("/");
 };
 
 const getFolder = async (req, res) => {
@@ -61,9 +62,14 @@ const getFolderUpdate = async (req, res) => {
 const postFolderUpdate = async (req, res) => {
   const { name } = req.body;
 
-  db.updateFolder(req.params.id, name);
+  await db.updateFolder(req.params.id, name);
 
   res.redirect(`/folder/${req.params.id}`);
+};
+
+const getDeleteFolder = async (req, res) => {
+  await db.deleteFolder(req.params.id);
+  res.redirect("/");
 };
 
 module.exports = {
@@ -78,4 +84,5 @@ module.exports = {
   getFolder,
   getFolderUpdate,
   postFolderUpdate,
+  getDeleteFolder,
 };

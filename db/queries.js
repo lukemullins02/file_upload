@@ -40,10 +40,17 @@ async function updateFolder(id, name) {
   });
 }
 
+async function deleteFolder(id) {
+  await prisma.folder.delete({
+    where: { id: Number(id) },
+  });
+}
+
 module.exports = {
   createUser,
   getFolders,
   getFolder,
   createFolder,
   updateFolder,
+  deleteFolder,
 };
