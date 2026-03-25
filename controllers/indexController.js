@@ -34,9 +34,16 @@ const getFileForm = (req, res) => {
 };
 
 const postFileForm = async (req, res) => {
-  const { originalname, size, path } = req.file;
+  const { originalname, size, filename, path } = req.file;
 
-  await db.createFile(originalname, size, req.user.id, req.params.id, path);
+  await db.createFile(
+    originalname,
+    size,
+    req.user.id,
+    req.params.id,
+    filename,
+    path,
+  );
 
   res.redirect(`/folder/${req.params.id}`);
 };
@@ -89,6 +96,16 @@ const getFilePage = async (req, res) => {
   });
 };
 
+const getFileDownload = async (req, res) => {
+  const file = await db.getFile(req.params.file_id);
+
+  const url = cloudinary.url(file.publicId, {
+    flags: "attachment",
+  });
+
+  res.redirect(url);
+};
+
 module.exports = {
   getHome,
   getSignUp,
@@ -103,4 +120,5 @@ module.exports = {
   postFolderUpdate,
   getDeleteFolder,
   getFilePage,
+  getFileDownload,
 };

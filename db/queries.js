@@ -46,9 +46,9 @@ async function deleteFolder(id) {
   });
 }
 
-async function createFile(name, size, userId, folderId, url) {
+async function createFile(name, size, userId, folderId, publicId, url) {
   await prisma.file.create({
-    data: { name, size, userId, folderId: Number(folderId), url },
+    data: { name, size, userId, folderId: Number(folderId), publicId, url },
   });
 }
 

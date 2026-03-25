@@ -16,6 +16,7 @@ const {
   postFolderUpdate,
   getDeleteFolder,
   getFilePage,
+  getFileDownload,
 } = require("../controllers/indexController");
 const multer = require("multer");
 const upload = multer({ storage: cloud_storage });
@@ -60,5 +61,7 @@ indexRouter.post("/folder/:id/update", postFolderUpdate);
 indexRouter.get("/folder/:id/delete", getDeleteFolder);
 
 indexRouter.get("/folder/:id/file/:file_id", getFilePage);
+
+indexRouter.get("/folder/:id/file/:file_id/download", getFileDownload);
 
 module.exports = indexRouter;

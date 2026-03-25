@@ -2,5 +2,7 @@
   <p><%= file.name %></p>
   <p>Size: <%= file.size %></p>
   <p>Date: <%= file.uploadAt %></p>
-  <a href="<%= file.url %>">Download</a>
+  <a href="/folder/<%= file.folderId%>/file/<%= file.id %>/download"
+    >Download</a
+  >
 </body>
