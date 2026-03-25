@@ -8,6 +8,8 @@ const {
   getFileForm,
   postFileForm,
   getHome,
+  getFolderForm,
+  postFolderForm,
 } = require("../controllers/indexController");
 const multer = require("multer");
 const upload = multer({ dest: "./public/" });
@@ -31,7 +33,16 @@ indexRouter.post(
   }),
 );
 
-indexRouter.get("/file-upload", getFileForm);
+indexRouter.get("/file-upload", isAuth, getFileForm);
+
 indexRouter.post("/file-upload", upload.single("file"), postFileForm);
+
+indexRouter.get("/folder/:id", (req, res) => {
+  res.send("Hello!");
+});
+
+indexRouter.get("/create-folder", isAuth, getFolderForm);
+
+indexRouter.post("/create-folder", isAuth, postFolderForm);
 
 module.exports = indexRouter;

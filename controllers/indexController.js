@@ -33,8 +33,19 @@ const getFileForm = (req, res) => {
 };
 
 const postFileForm = (req, res) => {
-  console.log(req.file);
   res.redirect("/");
+};
+
+const getFolderForm = (req, res) => {
+  res.render("folder-form");
+};
+
+const postFolderForm = async (req, res) => {
+  const { name } = req.body;
+
+  console.log(name, req.user.id);
+
+  await db.createFolder(name, req.user.id);
 };
 
 module.exports = {
@@ -44,4 +55,6 @@ module.exports = {
   getLogIn,
   getFileForm,
   postFileForm,
+  getFolderForm,
+  postFolderForm,
 };

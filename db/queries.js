@@ -13,7 +13,17 @@ async function getFolders() {
   return await prisma.folder.findMany();
 }
 
+async function createFolder(name, userId) {
+  await prisma.folder.create({
+    data: {
+      name: name,
+      userId: userId,
+    },
+  });
+}
+
 module.exports = {
   createUser,
   getFolders,
+  createFolder,
 };
