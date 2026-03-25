@@ -27,10 +27,16 @@ const getLogIn = (req, res) => {
 };
 
 const getFileForm = (req, res) => {
-  res.render("forms/file-form");
+  res.render("forms/file-form", {
+    id: req.params.id,
+  });
 };
 
-const postFileForm = (req, res) => {
+const postFileForm = async (req, res) => {
+  const { originalname, size } = req.file;
+
+  await db.createFile(originalname, size, req.user.id, req.params.id);
+
   res.redirect("/");
 };
 
@@ -46,9 +52,12 @@ const postFolderForm = async (req, res) => {
 
 const getFolder = async (req, res) => {
   const folder = await db.getFolder(req.params.id);
+  const files = await db.getFiles(req.user.id, req.params.id);
+
   console.log(folder);
   res.render("folder", {
     folder: folder,
+    files: files,
   });
 };
 

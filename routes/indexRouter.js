@@ -37,9 +37,13 @@ indexRouter.post(
   }),
 );
 
-indexRouter.get("/file-upload", isAuth, getFileForm);
+indexRouter.get("/folder/:id/file-upload", isAuth, getFileForm);
 
-indexRouter.post("/file-upload", upload.single("file"), postFileForm);
+indexRouter.post(
+  "/folder/:id/file-upload",
+  upload.single("file"),
+  postFileForm,
+);
 
 indexRouter.get("/folder/:id", isAuth, getFolder);
 
