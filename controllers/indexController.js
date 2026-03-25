@@ -1,5 +1,6 @@
 const db = require("../db/queries");
 const bcrypt = require("bcryptjs");
+const cloudinary = require("cloudinary").v2;
 
 const getHome = async (req, res) => {
   const folders = await db.getFolders(req.user.id);
@@ -33,11 +34,11 @@ const getFileForm = (req, res) => {
 };
 
 const postFileForm = async (req, res) => {
-  const { originalname, size } = req.file;
+  const { originalname, size, path } = req.file;
 
-  await db.createFile(originalname, size, req.user.id, req.params.id);
+  await db.createFile(originalname, size, req.user.id, req.params.id, path);
 
-  res.redirect("/");
+  res.redirect(`/folder/${req.params.id}`);
 };
 
 const getFolderForm = (req, res) => {

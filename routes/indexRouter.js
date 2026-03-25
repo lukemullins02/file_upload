@@ -1,6 +1,7 @@
 const { Router } = require("express");
 const passport = require("passport");
 const { isAuth, loggedIn } = require("../controllers/authController");
+const { cloud_storage } = require("../config/cloudinary");
 const {
   getSignUp,
   postSignUp,
@@ -17,7 +18,7 @@ const {
   getFilePage,
 } = require("../controllers/indexController");
 const multer = require("multer");
-const upload = multer({ dest: "./public/" });
+const upload = multer({ storage: cloud_storage });
 
 const indexRouter = Router();
 
