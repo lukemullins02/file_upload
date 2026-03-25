@@ -4,7 +4,7 @@
   <a href="/folder/<%= folder.id %>/file-upload">Add File</a>
   <div>
     <% for(let i = 0; i < files.length; i++){ %>
-    <a href="""><%= files[i].name %></a>
+    <a href="/folder/<%= folder.id %>/file/<%= files[i].id %>"><%= files[i].name %></a>
   <% } %>
   </div>
 </body>

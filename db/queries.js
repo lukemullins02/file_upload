@@ -58,6 +58,12 @@ async function getFiles(userId, folderId) {
   });
 }
 
+async function getFile(id) {
+  return await prisma.file.findUnique({
+    where: { id: Number(id) },
+  });
+}
+
 module.exports = {
   createUser,
   getFolders,
@@ -67,4 +73,5 @@ module.exports = {
   deleteFolder,
   createFile,
   getFiles,
+  getFile,
 };

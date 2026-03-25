@@ -81,6 +81,13 @@ const getDeleteFolder = async (req, res) => {
   res.redirect("/");
 };
 
+const getFilePage = async (req, res) => {
+  const file = await db.getFile(req.params.file_id);
+  res.render("file", {
+    file: file,
+  });
+};
+
 module.exports = {
   getHome,
   getSignUp,
@@ -94,4 +101,5 @@ module.exports = {
   getFolderUpdate,
   postFolderUpdate,
   getDeleteFolder,
+  getFilePage,
 };
