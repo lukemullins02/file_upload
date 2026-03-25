@@ -1,0 +1,26 @@
+<body class="roboto-text">
+  <main class="login">
+    <form
+      class="single-form"
+      method="POST"
+      action="/folder/<%= folder.id %>/update"
+    >
+      <div>
+        <label for="name">Folder Name </label>
+        <input
+          type="text"
+          name="name"
+          id="name"
+          value="<%= folder.name %>"
+          required
+        />
+      </div>
+      <input
+        type="submit"
+        name="submit"
+        id="submit"
+        value="Change Folder Name"
+      />
+    </form>
+  </main>
+</body>

@@ -1,10 +1,8 @@
 const db = require("../db/queries");
 const bcrypt = require("bcryptjs");
-const multer = require("multer");
-const upload = multer({ dest: "public/" });
 
 const getHome = async (req, res) => {
-  const folders = await db.getFolders();
+  const folders = await db.getFolders(req.user.id);
 
   res.render("home", {
     folders: folders,
@@ -21,15 +19,15 @@ const postSignUp = async (req, res) => {
 
   await db.createUser(username, hashPassword);
 
-  res.redirect("/sign-up");
+  res.redirect("forms/sign-up");
 };
 
 const getLogIn = (req, res) => {
-  res.render("login-form");
+  res.render("forms/login-form");
 };
 
 const getFileForm = (req, res) => {
-  res.render("file-form");
+  res.render("forms/file-form");
 };
 
 const postFileForm = (req, res) => {
@@ -37,15 +35,35 @@ const postFileForm = (req, res) => {
 };
 
 const getFolderForm = (req, res) => {
-  res.render("folder-form");
+  res.render("forms/folder-form");
 };
 
 const postFolderForm = async (req, res) => {
   const { name } = req.body;
-
-  console.log(name, req.user.id);
-
   await db.createFolder(name, req.user.id);
+};
+
+const getFolder = async (req, res) => {
+  const folder = await db.getFolder(req.params.id);
+  console.log(folder);
+  res.render("folder", {
+    folder: folder,
+  });
+};
+
+const getFolderUpdate = async (req, res) => {
+  const folder = await db.getFolder(req.params.id);
+  res.render("updates/folder-update", {
+    folder: folder,
+  });
+};
+
+const postFolderUpdate = async (req, res) => {
+  const { name } = req.body;
+
+  db.updateFolder(req.params.id, name);
+
+  res.redirect(`/folder/${req.params.id}`);
 };
 
 module.exports = {
@@ -57,4 +75,7 @@ module.exports = {
   postFileForm,
   getFolderForm,
   postFolderForm,
+  getFolder,
+  getFolderUpdate,
+  postFolderUpdate,
 };

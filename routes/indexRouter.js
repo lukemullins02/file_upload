@@ -10,6 +10,9 @@ const {
   getHome,
   getFolderForm,
   postFolderForm,
+  getFolder,
+  getFolderUpdate,
+  postFolderUpdate,
 } = require("../controllers/indexController");
 const multer = require("multer");
 const upload = multer({ dest: "./public/" });
@@ -37,12 +40,14 @@ indexRouter.get("/file-upload", isAuth, getFileForm);
 
 indexRouter.post("/file-upload", upload.single("file"), postFileForm);
 
-indexRouter.get("/folder/:id", (req, res) => {
-  res.send("Hello!");
-});
+indexRouter.get("/folder/:id", isAuth, getFolder);
 
 indexRouter.get("/create-folder", isAuth, getFolderForm);
 
-indexRouter.post("/create-folder", isAuth, postFolderForm);
+indexRouter.post("/create-folder", postFolderForm);
+
+indexRouter.get("/folder/:id/update", isAuth, getFolderUpdate);
+
+indexRouter.post("/folder/:id/update", postFolderUpdate);
 
 module.exports = indexRouter;

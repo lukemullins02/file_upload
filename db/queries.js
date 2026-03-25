@@ -9,8 +9,19 @@ async function createUser(username, password) {
   });
 }
 
-async function getFolders() {
-  return await prisma.folder.findMany();
+async function getFolders(userId) {
+  return await prisma.folder.findMany({
+    where: { userId: userId },
+    orderBy: {
+      id: "asc",
+    },
+  });
+}
+
+async function getFolder(id) {
+  return await prisma.folder.findUnique({
+    where: { id: Number(id) },
+  });
 }
 
 async function createFolder(name, userId) {
@@ -22,8 +33,17 @@ async function createFolder(name, userId) {
   });
 }
 
+async function updateFolder(id, name) {
+  await prisma.folder.update({
+    where: { id: Number(id) },
+    data: { name: name },
+  });
+}
+
 module.exports = {
   createUser,
   getFolders,
+  getFolder,
   createFolder,
+  updateFolder,
 };
