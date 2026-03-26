@@ -25,6 +25,7 @@
     "bcryptjs": "^3.0.3",
     "cloudinary": "^2.9.0",
     "cloudinary-build-url": "^0.2.4",
+    "connect-flash": "^0.1.1",
     "connect-pg-simple": "^10.0.0",
     "ejs": "^5.0.1",
     "express": "^5.2.1",

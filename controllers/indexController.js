@@ -72,7 +72,18 @@ const postSignUp = [
 ];
 
 const getLogIn = (req, res) => {
-  res.render("forms/login-form");
+  const errorMessages = req.session.messages || [];
+  req.session.messages = [];
+
+  const lastMessage = errorMessages.length
+    ? [errorMessages[errorMessages.length - 1]]
+    : [];
+
+  if (!req.user) {
+    res.render("forms/login-form", { messages: lastMessage });
+  } else {
+    res.redirect("/");
+  }
 };
 
 const postFileForm = async (req, res) => {
