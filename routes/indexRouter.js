@@ -26,12 +26,13 @@ indexRouter.get("/", isAuth, getHome);
 
 indexRouter.get("/sign-up", loggedIn, getSignUp);
 
-indexRouter.post("/sign-up", postSignUp);
+indexRouter.post("/sign-up", loggedIn, postSignUp);
 
 indexRouter.get("/login", loggedIn, getLogIn);
 
 indexRouter.post(
   "/login",
+  loggedIn,
   passport.authenticate("local", {
     failureRedirect: "/login",
     failureMessage: true,
@@ -39,22 +40,31 @@ indexRouter.post(
   }),
 );
 
-indexRouter.post("/folder/:id", upload.single("file"), postFileForm);
+indexRouter.get("/logout", isAuth, (req, res, next) => {
+  req.logout(function (err) {
+    if (err) {
+      return next(err);
+    }
+    res.redirect("/login");
+  });
+});
+
+indexRouter.post("/folder/:id", isAuth, upload.single("file"), postFileForm);
 
 indexRouter.get("/folder/:id", isAuth, getFolder);
 
 indexRouter.get("/create-folder", isAuth, getFolderForm);
 
-indexRouter.post("/create-folder", postFolderForm);
+indexRouter.post("/create-folder", isAuth, postFolderForm);
 
 indexRouter.get("/folder/:id/update", isAuth, getFolderUpdate);
 
-indexRouter.post("/folder/:id/update", postFolderUpdate);
+indexRouter.post("/folder/:id/update", isAuth, postFolderUpdate);
 
-indexRouter.get("/folder/:id/delete", getDeleteFolder);
+indexRouter.get("/folder/:id/delete", isAuth, getDeleteFolder);
 
-indexRouter.get("/folder/:id/file/:file_id", getFilePage);
+indexRouter.get("/folder/:id/file/:file_id", isAuth, getFilePage);
 
-indexRouter.get("/folder/:id/file/:file_id/download", getFileDownload);
+indexRouter.get("/folder/:id/file/:file_id/download", isAuth, getFileDownload);
 
 module.exports = indexRouter;
