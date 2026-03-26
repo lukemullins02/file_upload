@@ -1,0 +1,251 @@
+/* Css reset can be found here: https://www.joshwcomeau.com/css/custom-css-reset/*/
+
+/* 1. Use a more-intuitive box-sizing model */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* 2. Remove default margin */
+* {
+  margin: 0;
+}
+
+/* 3. Enable keyword animations */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    interpolate-size: allow-keywords;
+  }
+}
+
+body {
+  /* 4. Add accessible line-height */
+  line-height: 1.5;
+  /* 5. Improve text rendering */
+  -webkit-font-smoothing: antialiased;
+}
+
+/* 6. Improve media defaults */
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+/* 7. Inherit fonts for form controls */
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+/* 8. Avoid text overflows */
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  overflow-wrap: break-word;
+}
+
+/* 9. Improve line wrapping */
+p {
+  text-wrap: pretty;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  text-wrap: balance;
+}
+
+/*
+  10. Create a root stacking context
+*/
+#root,
+#__next {
+  isolation: isolate;
+}
+
+/* Project CSS */
+
+.roboto-text {
+  font-family: "Roboto", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-style: normal;
+  font-variation-settings: "wdth" 100;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.navbar {
+  display: flex;
+  align-items: center;
+  min-height: 45px;
+
+  background-color: rgb(235, 235, 235);
+  border-bottom: 1px solid black;
+  width: 100%;
+  font-size: 1.2rem;
+}
+
+.navbar > ul {
+  display: flex;
+  list-style: none;
+  gap: 1.3rem;
+  width: 100%;
+  padding-right: 40px;
+}
+
+.nav-right {
+  display: flex;
+  margin-left: auto;
+  gap: 25px;
+}
+
+.nav-right > li > a {
+  color: rgb(0, 0, 0);
+  text-decoration: none;
+  font-weight: 400;
+}
+
+.nav-right > li > a:hover {
+  cursor: pointer;
+  color: rgb(99, 99, 99);
+}
+
+.nav-left > a {
+  color: rgb(0, 0, 0);
+  text-decoration: none;
+  font-weight: 400;
+}
+
+.nav-left > p {
+  color: rgb(0, 0, 0);
+  font-size: 1.3rem;
+  font-weight: 400;
+}
+
+.nav-left > a:hover {
+  cursor: pointer;
+  color: rgb(99, 99, 99);
+}
+
+.login {
+  height: inherit;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.login > h1 {
+  text-align: center;
+}
+
+.single-form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  max-width: 400px;
+  margin: 0 auto;
+
+  margin-bottom: 100px;
+}
+
+.login-error {
+  text-align: center;
+  color: red;
+}
+
+.single-form > div {
+  display: flex;
+  flex-direction: column;
+  font-size: 1.1rem;
+}
+
+.single-form > div > input {
+  border: 1px solid #657786;
+  border-radius: 5px;
+
+  padding-left: 5px;
+}
+
+.single-form > div > a {
+  text-align: center;
+  font-size: 1.2rem;
+}
+
+.single-form > input[type="submit"] {
+  border: 1px solid #657786;
+  background-color: white;
+  font-size: 1.2rem;
+  border-radius: 5px;
+  transition: transform 0.3s ease;
+  width: 50%;
+  margin: 0 auto;
+}
+
+.single-form > input[type="submit"]:hover {
+  cursor: pointer;
+  transform: scale(1.03);
+  background-color: #000000;
+  color: white;
+}
+
+.log_logo {
+  width: 220px;
+  height: 220px;
+  margin: 0 auto;
+}
+
+.btn-center {
+  margin: 0 auto;
+  display: inline-block;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  border: 1px solid #657786;
+  border-radius: 5px;
+  color: black;
+  transition: background-color 0.3s ease;
+  font-size: 1.1rem;
+  font-weight: 400;
+  margin-top: 25px;
+}
+
+.btn-center:hover {
+  transform: scale(1.03);
+}
+
+.cent-form {
+  text-align: center;
+  margin-bottom: 200px;
+}
+
+.cent-form > div {
+  font-size: 1.3rem;
+}
+
+.cent-form > div > label {
+  padding-bottom: 10px;
+}
+
+.cent-form > input[type="submit"] {
+  font-size: 1.2rem;
+}

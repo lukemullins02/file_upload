@@ -1,5 +1,15 @@
+<head>
+  <link rel="stylesheet" href="/styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+    rel="stylesheet"
+  />
+</head>
 <body class="roboto-text">
   <main class="login">
+    <h1>Sign Up</h1>
     <%- include("../partials/errors.ejs") %>
     <form class="single-form" method="POST" action="/sign-up">
       <div>
@@ -19,8 +29,10 @@
           required
         />
       </div>
+      <div>
+        <a href="/login">Login</a>
+      </div>
       <input type="submit" name="submit" id="submit" value="Create User" />
     </form>
   </main>
-  <a href="/login">Login</a>
 </body>
