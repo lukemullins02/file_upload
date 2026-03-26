@@ -6,7 +6,6 @@ const {
   getSignUp,
   postSignUp,
   getLogIn,
-  getFileForm,
   postFileForm,
   getHome,
   getFolderForm,
