@@ -2,6 +2,7 @@
   <%- include("partials/navbar.ejs") %>
   <a href="/folder/<%= folder.id %>/update">Update Folder</a>
   <a href="/folder/<%= folder.id %>/delete">Delete Folder</a>
+  <%- include("partials/errors.ejs") %>
   <%- include("forms/file-form.ejs") %>
   <div>
     <% for(let i = 0; i < files.length; i++){ %>

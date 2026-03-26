@@ -1,6 +1,13 @@
 const db = require("../db/queries");
 const bcrypt = require("bcryptjs");
 const cloudinary = require("cloudinary").v2;
+const multer = require("multer");
+const { cloud_storage } = require("../config/cloudinary");
+const upload = multer({
+  storage: cloud_storage,
+  limits: { fileSize: 5 * 1024 * 1024 },
+}).single("file");
+
 const { body, validationResult, matchedData } = require("express-validator");
 
 const spaceErr = "must have no spaces.";
@@ -86,7 +93,31 @@ const getLogIn = (req, res) => {
   }
 };
 
+const postFileCloud = (req, res, next) => {
+  const files = db.getFiles(req.user.id, req.params.id);
+
+  upload(req, res, function (err) {
+    if (err instanceof multer.MulterError) {
+      if (err.code === "LIMIT_FILE_SIZE") {
+        return res.status(400).render("folder.ejs", {
+          errors: [{ msg: "File too large. Max 5MB." }],
+          folder: { id: req.params.id },
+          files,
+        });
+      }
+    } else if (err) {
+      return res.status(400).render("folder.ejs", {
+        errors: [{ msg: err.message }],
+        folder: { id: req.params.id },
+        files,
+      });
+    }
+
+    next();
+  });
+};
 const postFileForm = async (req, res) => {
+  console.log("hello", req.file);
   const { originalname, size, filename, path } = req.file;
 
   await db.createFile(
@@ -164,6 +195,7 @@ module.exports = {
   getSignUp,
   postSignUp,
   getLogIn,
+  postFileCloud,
   postFileForm,
   getFolderForm,
   postFolderForm,

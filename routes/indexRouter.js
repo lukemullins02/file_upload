@@ -1,7 +1,6 @@
 const { Router } = require("express");
 const passport = require("passport");
 const { isAuth, loggedIn } = require("../controllers/authController");
-const { cloud_storage } = require("../config/cloudinary");
 const {
   getSignUp,
   postSignUp,
@@ -16,9 +15,8 @@ const {
   getDeleteFolder,
   getFilePage,
   getFileDownload,
+  postFileCloud,
 } = require("../controllers/indexController");
-const multer = require("multer");
-const upload = multer({ storage: cloud_storage });
 
 const indexRouter = Router();
 
@@ -49,7 +47,7 @@ indexRouter.get("/logout", isAuth, (req, res, next) => {
   });
 });
 
-indexRouter.post("/folder/:id", isAuth, upload.single("file"), postFileForm);
+indexRouter.post("/folder/:id", isAuth, postFileCloud, postFileForm);
 
 indexRouter.get("/folder/:id", isAuth, getFolder);
 
