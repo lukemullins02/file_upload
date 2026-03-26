@@ -21,6 +21,7 @@ const cloud_storage = new CloudinaryStorage({
       "zip",
     ],
     resource_type: "auto",
+    use_filename_as_display_name: true,
   },
 });
 
