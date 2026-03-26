@@ -1,5 +1,6 @@
 <body class="roboto-text">
   <main class="login">
+    <%- include("../partials/errors.ejs") %>
     <form class="single-form" method="POST" action="/sign-up">
       <div>
         <label for="username">Username </label>
@@ -9,7 +10,17 @@
         <label for="password">Password </label>
         <input type="password" name="password" id="password" required />
       </div>
+      <div>
+        <label for="confirmPassword">Confirm Password </label>
+        <input
+          type="password"
+          name="confirmPassword"
+          id="confirmPassword"
+          required
+        />
+      </div>
       <input type="submit" name="submit" id="submit" value="Create User" />
     </form>
   </main>
+  <a href="/login">Login</a>
 </body>

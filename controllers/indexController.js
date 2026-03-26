@@ -1,6 +1,33 @@
 const db = require("../db/queries");
 const bcrypt = require("bcryptjs");
 const cloudinary = require("cloudinary").v2;
+const { body, validationResult, matchedData } = require("express-validator");
+
+const spaceErr = "must have no spaces.";
+const userLengthErr =
+  "must be more than 3 characters and less than 16 characters.";
+const passwordLengthErr = " must be at least 8 characters long.";
+const mismatchErr =
+  " must contain at least one uppercase letter, one lowercase letter, one number, and one symbol.";
+const passwordErr = "Passwords don't match.";
+
+const validateNewUser = [
+  body("username")
+    .custom((value) => !/\s/.test(value))
+    .withMessage(`Useername ${spaceErr}`)
+    .isLength({ min: 4, max: 15 })
+    .withMessage(`Username ${userLengthErr}`),
+  body("password")
+    .isLength({ min: 8 })
+    .withMessage(`Password ${passwordLengthErr}`)
+    .matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^a-zA-Z\d]).*$/)
+    .withMessage(`Password ${mismatchErr}`),
+  body("confirmPassword")
+    .custom((value, { req }) => {
+      return value === req.body.password;
+    })
+    .withMessage(`${passwordErr}`),
+];
 
 const getHome = async (req, res) => {
   const folders = await db.getFolders(req.user.id);
@@ -11,17 +38,38 @@ const getHome = async (req, res) => {
 };
 
 const getSignUp = (req, res) => {
-  res.render("sign-up-form");
+  res.render("forms/sign-up-form");
 };
 
-const postSignUp = async (req, res) => {
-  const { username, password } = req.body;
-  const hashPassword = await bcrypt.hash(password, 10);
+const postSignUp = [
+  validateNewUser,
+  async (req, res) => {
+    const errors = validationResult(req).array();
 
-  await db.createUser(username, hashPassword);
+    if (errors.length != 0) {
+      return res.status(400).render("forms/sign-up-form", {
+        errors: errors,
+      });
+    }
 
-  res.redirect("forms/sign-up");
-};
+    const { username, password } = matchedData(req);
+
+    const userExist = await db.getUser(username);
+
+    if (userExist) {
+      errors.push({ msg: "Username already registered. Try again." });
+      return res.status(400).render("forms/sign-up-form", {
+        errors: errors,
+      });
+    }
+
+    const hashPassword = await bcrypt.hash(password, 10);
+
+    await db.createUser(username, hashPassword);
+
+    res.redirect("/login");
+  },
+];
 
 const getLogIn = (req, res) => {
   res.render("forms/login-form");

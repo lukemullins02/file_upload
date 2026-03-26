@@ -9,6 +9,12 @@ async function createUser(username, password) {
   });
 }
 
+async function getUser(username) {
+  return await prisma.user.findUnique({
+    where: { username },
+  });
+}
+
 async function getFolders(userId) {
   return await prisma.folder.findMany({
     where: { userId: userId },
@@ -66,6 +72,7 @@ async function getFile(id) {
 
 module.exports = {
   createUser,
+  getUser,
   getFolders,
   getFolder,
   createFolder,
