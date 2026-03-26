@@ -27,12 +27,6 @@ const getLogIn = (req, res) => {
   res.render("forms/login-form");
 };
 
-const getFileForm = (req, res) => {
-  res.render("forms/file-form", {
-    id: req.params.id,
-  });
-};
-
 const postFileForm = async (req, res) => {
   const { originalname, size, filename, path } = req.file;
 
@@ -111,7 +105,6 @@ module.exports = {
   getSignUp,
   postSignUp,
   getLogIn,
-  getFileForm,
   postFileForm,
   getFolderForm,
   postFolderForm,
