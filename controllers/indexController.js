@@ -216,7 +216,7 @@ const getFilePage = async (req, res) => {
 
 const getFileDownload = async (req, res) => {
   const file = await db.getFile(req.params.file_id);
-  const url = `https://res.cloudinary.com/${process.env.CLOUDINARY_CLOUD_NAME}/image/upload/fl_attachment/${file.publicId}`;
+  const url = `https://res.cloudinary.com/${process.env.CLOUDINARY_DB}/image/upload/fl_attachment/${file.publicId}`;
   res.redirect(url);
 };
 
