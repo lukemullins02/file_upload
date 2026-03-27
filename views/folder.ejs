@@ -16,11 +16,19 @@
     const deleteBtn = document.querySelector(".btn-center-delete");
 
     deleteBtn.addEventListener("click", function (event) {
+
+      
       const userInput = prompt("Deleting folder will result in all files inside the folder to be lost. Type yes to delete.")
 
+      if(userInput){
+
       if(userInput.toLowerCase() !== 'yes'){
+ 
         event.preventDefault();
       }
+    }else{
+      event.preventDefault();
+    }
 
  
     });

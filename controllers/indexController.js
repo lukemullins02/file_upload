@@ -112,7 +112,7 @@ const postFileCloud = async (req, res, next) => {
       }
     } else if (err) {
       return res.status(400).render("folder", {
-        errors: [{ msg: err.message }],
+        errors: [{ msg: "Only jpeg, jpg, gif, png, and pdf files allowed." }],
         folder: { id: req.params.id },
         files: files,
       });
@@ -184,7 +184,19 @@ const postFolderUpdate = async (req, res) => {
 };
 
 const getDeleteFolder = async (req, res) => {
+  const files = await db.getFiles(req.user.id, req.params.id);
+
+  for (let i = 0; i < files.length; i++) {
+    await cloudinary.uploader
+      .destroy(files[i].publicId)
+      .then((result) => console.log(result))
+      .catch((err) => {
+        console.error(err);
+      });
+  }
+
   await db.deleteFolder(req.params.id);
+
   res.redirect("/");
 };
 

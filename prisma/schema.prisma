@@ -19,7 +19,7 @@ model User{
 model Folder{
   id Int @id @default(autoincrement())
   name String 
-  user User @relation(fields: [userId], references: [id])
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId Int @map("user_id")
   files File[]
   @@map("folders")
@@ -32,9 +32,9 @@ model File{
   uploadAt DateTime @default(now())
   url String
   publicId String @map("public_id")
-  user User @relation(fields: [userId], references: [id])
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId Int @map("user_id")
-  folder Folder @relation(fields: [folderId], references: [id])
+  folder Folder @relation(fields: [folderId], references: [id],onDelete: Cascade)
   folderId Int @map("folder_id")
   @@map("files")
 }
