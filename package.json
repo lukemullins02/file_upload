@@ -23,7 +23,7 @@
     "@quixo3/prisma-session-store": "^3.1.19",
     "bcrypt": "^6.0.0",
     "bcryptjs": "^3.0.3",
-    "cloudinary": "^2.9.0",
+    "cloudinary": "^1.41.3",
     "cloudinary-build-url": "^0.2.4",
     "connect-flash": "^0.1.1",
     "connect-pg-simple": "^10.0.0",
