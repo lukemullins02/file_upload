@@ -2,7 +2,7 @@
   <%- include("partials/navbar.ejs") %>
   <div class="folder-view-cent">
   <a class="btn-center" href="/folder/<%= folder.id %>/update">Update Folder</a>
-  <a class="btn-center" href="/folder/<%= folder.id %>/delete">Delete Folder</a>
+  <a class="btn-center-delete" href="/folder/<%= folder.id %>/delete">Delete Folder</a>
   </div>
   <%- include("forms/file-form.ejs") %>
   <div class="container">
@@ -11,3 +11,18 @@
   <% } %>
   </div>
 </body>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const deleteBtn = document.querySelector(".btn-center-delete");
+
+    deleteBtn.addEventListener("click", function (event) {
+      const userInput = prompt("Deleting folder will result in all files inside the folder to be lost. Type yes to delete.")
+
+      if(userInput.toLowerCase() !== 'yes'){
+        event.preventDefault();
+      }
+
+ 
+    });
+  });
+</script>

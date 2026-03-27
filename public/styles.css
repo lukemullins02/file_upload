@@ -229,7 +229,27 @@ body {
   margin-top: 25px;
 }
 
+.btn-center-delete {
+  margin: 0 auto;
+  display: inline-block;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  border: 1px solid #657786;
+  border-radius: 5px;
+  color: black;
+  transition: background-color 0.3s ease;
+  font-size: 1.1rem;
+  font-weight: 400;
+  margin-top: 25px;
+}
+
 .btn-center:hover {
+  transform: scale(1.03);
+}
+
+.btn-center-delete:hover {
   transform: scale(1.03);
 }
 
