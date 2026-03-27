@@ -1,9 +1,11 @@
 <body class="roboto-text">
   <%- include("partials/navbar.ejs") %>
-  <p><%= file.name %></p>
-  <p>Size: <%= file.size %></p>
-  <p>Date: <%= file.uploadAt %></p>
-  <a href="/folder/<%= file.folderId%>/file/<%= file.id %>/download"
-    >Download</a
-  >
+  <main class="expand-file">
+    <p><%= file.name %></p>
+    <p>Size: <%= file.size %> Bytes</p>
+    <p>Date: <%= file.uploadAt %></p>
+    <a href="/folder/<%= file.folderId%>/file/<%= file.id %>/download"
+      >Download</a
+    >
+  </main>
 </body>

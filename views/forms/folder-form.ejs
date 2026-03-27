@@ -4,6 +4,7 @@
     <form class="single-form cent-form" method="POST" action="/create-folder">
       <div>
         <label for="name">Folder Name </label>
+        <%- include("../partials/errors.ejs") %>
         <input type="text" name="name" id="name" required />
       </div>
       <input type="submit" name="submit" id="submit" value="Create Folder" />

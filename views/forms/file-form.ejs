@@ -1,12 +1,19 @@
 <form
-  class="single-form"
+  class="single-form cent-form-file file-form"
   method="POST"
   enctype="multipart/form-data"
   action="/folder/<%= folder.id %>"
 >
-  <div>
-    <label for="file">Upload File </label>
-    <input type="file" name="file" id="file" required />
+  <div class="file-div">
+    <label class="cent-file-label" for="file">Upload File </label>
+    <%- include("../partials/errors.ejs") %>
+    <input class="file-upload" type="file" name="file" id="file" required />
   </div>
-  <input type="submit" name="submit" id="submit" value="Submit" />
+  <input
+    class="file-submit"
+    value="Upload"
+    type="submit"
+    name="submit"
+    id="submit"
+  />
 </form>

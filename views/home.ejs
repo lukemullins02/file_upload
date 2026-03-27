@@ -1,7 +1,9 @@
 <body class="roboto-text">
     <%- include("partials/navbar.ejs") %>
   <a class="btn-center"  href="/create-folder">Add Folder</a>
+  <div class="container">
   <% for(let i = 0; i < folders.length; i++){ %>
-    <a href="/folder/<%= folders[i].id %>"><%= folders[i].name %></a>
+    <a class="btn-fold" href="/folder/<%= folders[i].id %>"><img class="fold-img" src="/folder.svg" />  <%= folders[i].name %> </a>
   <% } %>
+  </div>
 </body>

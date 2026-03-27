@@ -249,3 +249,99 @@ body {
 .cent-form > input[type="submit"] {
   font-size: 1.2rem;
 }
+
+.container {
+  align-items: start;
+  display: grid;
+  padding-top: 20px;
+  grid-template-columns: repeat(auto-fit, 225px);
+  padding: 20px 50px 20px 50px;
+  gap: 1.5rem;
+}
+
+.btn-fold {
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 10px 20px;
+  text-decoration: none;
+  cursor: pointer;
+  border: 1px solid #657786;
+  border-radius: 5px;
+  color: black;
+  font-size: 1.1rem;
+  font-weight: 400;
+  margin-top: 25px;
+  transition: transform 0.3s ease;
+  gap: 6px;
+}
+
+.btn-fold:hover {
+  transform: scale(1.03);
+}
+
+.fold-img {
+  height: 25px;
+  width: 25px;
+  padding-right: 5px;
+}
+
+.signup-error {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.signup-error > li {
+  color: red;
+  text-align: center;
+}
+
+.folder-view-cent {
+  display: flex;
+  width: 40%;
+  margin: 0 auto;
+}
+
+.file-upload::file-selector-button {
+  background-color: rgb(184, 184, 184);
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+
+  cursor: pointer;
+  font-family: sans-serif;
+  margin-right: 15px;
+  transition: background-color 0.3s;
+}
+
+.file-upload::file-selector-button:hover {
+  background-color: #000000;
+  color: white;
+}
+
+.file-form {
+  margin-top: 60px;
+  margin-bottom: 0;
+}
+
+.file-name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  min-width: 0;
+}
+
+.cent-file-label {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.expand-file {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 1.3rem;
+  margin-top: 200px;
+}
